@@ -21,16 +21,41 @@ export default function Login() {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white p-6 rounded shadow">
-      <h2 className="text-2xl mb-4">Login</h2>
-      {err && <div className="bg-red-100 text-red-800 p-2 mb-2">{err}</div>}
-      <form onSubmit={submit} className="space-y-3">
-        <input required value={form.email} onChange={e=>setForm({...form, email: e.target.value})}
-          placeholder="Email" className="w-full p-2 border rounded" />
-        <input required value={form.password} type="password" onChange={e=>setForm({...form, password: e.target.value})}
-          placeholder="Password" className="w-full p-2 border rounded" />
-        <button className="w-full bg-blue-500 text-white p-2 rounded">Login</button>
-      </form>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-white to-blue-200 p-4">
+      <div className="w-full max-w-md bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-8 border border-blue-100">
+        <h2 className="text-3xl font-bold text-center text-blue-700 mb-6">Welcome Back</h2>
+        {err && (
+          <div className="bg-red-100 text-red-800 border border-red-300 rounded p-2 mb-4 text-sm text-center">
+            {err}
+          </div>
+        )}
+        <form onSubmit={submit} className="space-y-4">
+          <div>
+            <input
+              required
+              value={form.email}
+              onChange={e => setForm({ ...form, email: e.target.value })}
+              placeholder="Email"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+            />
+          </div>
+          <div>
+            <input
+              required
+              type="password"
+              value={form.password}
+              onChange={e => setForm({ ...form, password: e.target.value })}
+              placeholder="Password"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+            />
+          </div>
+          <button
+            className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-transform transform hover:scale-[1.02]"
+          >
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

@@ -1,22 +1,42 @@
 import Farmer from "../models/Farmer.js";
 
 export const getFarmers = async (req, res) => {
-  const farmers = await Farmer.find();
-  res.json(farmers);
+  try {
+    const farmers = await Farmer.find();
+    res.json(farmers);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 export const addFarmer = async (req, res) => {
-  const { name, contact, address } = req.body;
-  const farmer = await Farmer.create({ name, contact, address });
-  res.status(201).json(farmer);
+  try {
+    const { farmerId, name, phone, address } = req.body;
+    if (!farmerId) {
+      return res.status(400).json({ message: "farmerId is required" });
+    }
+
+    const farmer = await Farmer.create({ farmerId, name, phone, address });
+    res.status(201).json(farmer);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 export const updateFarmer = async (req, res) => {
-  const farmer = await Farmer.findByIdAndUpdate(req.params.id, req.body, { new: true });
-  res.json(farmer);
+  try {
+    const farmer = await Farmer.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(farmer);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 export const deleteFarmer = async (req, res) => {
-  await Farmer.findByIdAndDelete(req.params.id);
-  res.json({ message: "Farmer deleted" });
+  try {
+    await Farmer.findByIdAndDelete(req.params.id);
+    res.json({ message: "Farmer deleted" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
