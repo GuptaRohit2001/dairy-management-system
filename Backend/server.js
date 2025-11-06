@@ -11,7 +11,17 @@ import salesRoutes from "./routes/saleRoutes.js";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://smart-dairy-manager.vercel.app", // your frontend domain on Vercel
+      "http://localhost:5173" // for local development (Vite default)
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 connectDB(process.env.MONGO_URI);
