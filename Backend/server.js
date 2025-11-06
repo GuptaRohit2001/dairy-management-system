@@ -33,5 +33,12 @@ app.use("/api/sales", salesRoutes);
 
 app.get("/", (req, res) => res.send("Dairy Management API is running... 🚀"));
 
+app.use((req, res, next) => {
+  console.log("Request received from:", req.headers.origin);
+  next();
+});
+
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
