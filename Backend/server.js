@@ -11,13 +11,25 @@ import salesRoutes from "./routes/saleRoutes.js";
 dotenv.config();
 
 const app = express();
+
+
+const allowedOrigins = [
+  "https://smart-dairy-manager.vercel.app",
+  "https://smart-dairy-manager-5apl7su7e-rohit-guptas-projects-33ad8a72.vercel.app",
+  "http://localhost:5173",
+];
+
 app.use(
   cors({
-    origin: [
-      "https://smart-dairy-manager.vercel.app",
-      "https://smart-dairy-manager-p2njfhgig-rohit-guptas-projects-33ad8a72.vercel.app", // the preview/actual frontend URL
-      "http://localhost:5173" // for local development
-    ],
+    origin: function (origin, callback) {
+      // allow requests with no origin (like mobile apps, Postman)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -43,4 +55,4 @@ app.use((req, res, next) => {
 
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+// app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
