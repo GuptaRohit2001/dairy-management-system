@@ -14,13 +14,15 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "https://smart-dairy-manager.vercel.app", // your frontend domain on Vercel
-      "http://localhost:5173" // for local development (Vite default)
+      "https://smart-dairy-manager.vercel.app",
+      "https://smart-dairy-manager-p2njfhgig-rohit-guptas-projects-33ad8a72.vercel.app", // the preview/actual frontend URL
+      "http://localhost:5173" // for local development
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+
 
 app.use(express.json());
 
