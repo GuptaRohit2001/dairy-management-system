@@ -52,7 +52,7 @@ export default function Register() {
             placeholder="Password"
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none transition"
           />
-          <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-transform transform hover:scale-[1.02] shadow-md">
+          <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-transform transform hover:scale-[1.02] shadow-md cursor-pointer">
             Sign up
           </button>
         </form>

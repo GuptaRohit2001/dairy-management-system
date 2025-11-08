@@ -50,7 +50,7 @@ export default function Login() {
             />
           </div>
           <button
-            className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-transform transform hover:scale-[1.02]"
+            className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-transform transform hover:scale-[1.02] cursor-pointer"
           >
             Login
           </button>
