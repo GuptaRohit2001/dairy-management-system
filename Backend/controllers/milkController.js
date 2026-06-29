@@ -46,3 +46,26 @@ export const getDailyMilkSummary = async (req, res) => {
   }
 };
 
+
+export const deleteMilkRecord = async (req, res) => {
+  try {
+    const record = await MilkCollection.findById(req.params.id);
+
+    if (!record) {
+      return res.status(404).json({
+        message: "Milk record not found",
+      });
+    }
+
+    await record.deleteOne();
+
+    res.json({
+      message: "Milk record deleted successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error deleting milk record",
+      error: error.message,
+    });
+  }
+};

@@ -27,14 +27,10 @@ export default function Farmers() {
   }, []);
 
   useEffect(() => {
-    if (query === '') load();
-  }, [query]);
-
-  useEffect(() => {
-    if (query.trim() !== '') {
-      const delay = setTimeout(() => load(query), 400);
-      return () => clearTimeout(delay);
-    }
+    const delay = setTimeout(() => {
+      load(query.trim());
+    }, 400);
+    return () => clearTimeout(delay);
   }, [query]);
 
   const submit = async (e) => {
@@ -75,9 +71,8 @@ export default function Farmers() {
     }
   };
 
-  const onSearch = async () => {
-    if (!query.trim()) return load();
-    await load(query);
+  const onSearch = () => {
+    load(query.trim());
   };
 
   // Pagination logic
@@ -112,7 +107,7 @@ export default function Farmers() {
 
       {/* ✅ Main grid */}
       <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto items-start">
-        
+
         {/* ➕ Add/Edit Farmer Form */}
         <div className="bg-white p-8 rounded-2xl shadow-lg border border-green-100 hover:shadow-xl transition-shadow duration-300 h-[450px] flex flex-col justify-center">
           <div className="flex flex-col justify-center h-full">
@@ -154,7 +149,6 @@ export default function Farmers() {
                 className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-green-400"
               />
 
-              {/* Centered buttons */}
               <div className="flex gap-3 justify-center mt-6">
                 <button className="w-1/2 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg transition-all duration-200 shadow cursor-pointer">
                   {editId ? 'Update' : 'Add'}
@@ -218,10 +212,7 @@ export default function Farmers() {
                 ))}
                 {farmers.length === 0 && (
                   <tr>
-                    <td
-                      colSpan={4}
-                      className="p-3 text-center text-gray-500 italic"
-                    >
+                    <td colSpan={4} className="p-3 text-center text-gray-500 italic">
                       No farmers found.
                     </td>
                   </tr>

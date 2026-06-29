@@ -2,7 +2,20 @@ import Farmer from "../models/Farmer.js";
 
 export const getFarmers = async (req, res) => {
   try {
-    const farmers = await Farmer.find();
+    const q = req.query.q?.trim();
+
+    if (!q) {
+      const farmers = await Farmer.find();
+      return res.json(farmers);
+    }
+
+    const farmers = await Farmer.find({
+      $or: [
+        { farmerId: { $regex: q, $options: "i" } },
+        { name: { $regex: q, $options: "i" } },
+      ],
+    });
+
     res.json(farmers);
   } catch (err) {
     res.status(500).json({ message: err.message });
